@@ -4,17 +4,26 @@ import './App.css';
 
 class App extends Component {
 
-    handleClick() {
+    state = {
+        says: '',
+        words: ''
+    }
+
+    handleChange = (e) => {
+        this.setState({words: e.currentTarget.value})
+    }
+
+    handleClick = () => {
         let text;
 
         // make sure speech recognition is supported in user's browser
         if (window['webkitSpeechRecognition']) {
 
-            const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
 
             // korean
-            recognition.lang = 'kor';
+            recognition.lang = 'ko-KR';
 
             // process user audio while user is speaking
             recognition.interimResults = false;
@@ -23,14 +32,17 @@ class App extends Component {
             recognition.continuous = false;
 
             // start the speech --> string transcription process
-            recognition.start()
+            recognition.start();
 
             // this is what actually captures your speech & converts it to a str
             recognition.onresult = e => {
                 let last = e.results.length - 1;
+                console.log('last', last);
 
                 // text = what you just said, in string form
                 text = e.results[last][0].transcript;
+
+                this.setState({says: text})
 
                 // todo: will put a socket here later
             }
@@ -39,6 +51,7 @@ class App extends Component {
             recognition.onspeechend = () => {
                 recognition.stop();
             }
+            console.log(recognition);
 
             // if error, set text = to what the error is so user knows
             recognition.onerror = e => {
@@ -51,7 +64,14 @@ class App extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>test</button>
+                <div>
+                    <button onClick={this.handleClick}>test</button>
+                </div>
+                <div>text: {this.state.says ? this.state.says : '"test" 버튼을 누르시고 말씀을 해주세요'}</div>
+                <div>
+                    <input type="text" onChange={this.handleChange} />
+                    {this.state.words}
+                </div>
             </div>
         )
     }
