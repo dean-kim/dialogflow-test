@@ -1,11 +1,14 @@
 .App {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .button-container {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .speak-button {
