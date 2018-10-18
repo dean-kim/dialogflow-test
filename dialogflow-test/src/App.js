@@ -5,12 +5,7 @@ import './App.css';
 class App extends Component {
 
     state = {
-        says: '',
-        words: ''
-    }
-
-    handleChange = (e) => {
-        this.setState({words: e.currentTarget.value})
+        says: ''
     }
 
     handleClick = () => {
@@ -68,10 +63,6 @@ class App extends Component {
                     <button onClick={this.handleClick}>speak</button>
                 </div>
                 <div>text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}</div>
-                <div>
-                    <input type="text" onChange={this.handleChange} />
-                    {this.state.words}
-                </div>
             </div>
         )
     }
