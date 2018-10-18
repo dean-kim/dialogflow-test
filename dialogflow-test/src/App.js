@@ -58,11 +58,11 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    <button onClick={this.handleClick}>speak</button>
+            <div className="App">
+                <div className="button-container">
+                    <div className="speak-button" onClick={this.handleClick}>speak</div>
                 </div>
-                <div>text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}</div>
+                <div className="return-text">text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}</div>
             </div>
         )
     }
