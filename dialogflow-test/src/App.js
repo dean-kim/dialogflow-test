@@ -39,7 +39,8 @@ class App extends Component {
 
                 this.setState({says: text})
 
-                // todo: will put a socket here later
+                // socket
+                socket.emit("userAudio", text)
             }
 
             // this will stop transcribing your speech when you stop speaking
