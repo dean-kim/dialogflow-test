@@ -15,6 +15,7 @@
         "bfj": "6.1.1",
         "case-sensitive-paths-webpack-plugin": "2.1.2",
         "chalk": "2.4.1",
+        "cryptiles": "^4.1.2",
         "css-loader": "1.0.0",
         "dotenv": "6.0.0",
         "dotenv-expand": "4.2.0",
@@ -73,7 +74,7 @@
     ],
     "jest": {
         "collectCoverageFrom": [
-        "src/**/*.{js,jsx}"
+            "src/**/*.{js,jsx}"
         ],
         "resolver": "jest-pnp-resolver",
         "setupFiles": [
@@ -112,5 +113,5 @@
             "react-app"
         ]
     },
-    "proxy" : "http://localhost:5050"
+    "proxy": "http://localhost:5050"
 }

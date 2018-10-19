@@ -2,27 +2,17 @@ const secret = require('./secret.json');
 const apiai = require('apiai')(secret["apiaiKey"]);
 
 const express = require('express');
-const http = require('http');
 const app = express();
 const server = app.listen(5050);
 const io = require('socket.io').listen(server);
 
 
-// const server = http.createServer(app);
-// server.listen(4000);
-
-
-// const io = require('socket.io')(server);
-
 io.on('connection', (socket) => {
     socket.on("userAudio", text => {
 
-        console.log('Hello');
-        console.log(text);
-
         // send text to AI here!
         // capture what the user just said in a userTextToSendToAI
-        const userTextToSendToAI = text.text;
+        const userTextToSendToAI = text;
 
         console.log(userTextToSendToAI);
 

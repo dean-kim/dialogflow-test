@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import socket from 'socket.io'
 import socketio from 'socket.io-client'
 import './App.css';
 
@@ -9,26 +8,6 @@ class App extends Component {
     state = {
         says: ''
     }
-
-    // synthVoice = (AIResponse) => {
-    //
-    //     // create context for speech synthesis
-    //     const synth = window.speechSynthesis;
-    //     const AIStringAsVoice = new SpeechSynthesisUtterance();
-    //
-    //     // define what text AI will be speaking
-    //     AIStringAsVoice.text = text;
-    //
-    //     // customize AI's voice
-    //     // this is just a sampling of ways to customize voice
-    //     AIStringAsVoice.voiceURI = 'Native';
-    //     AIStringAsVoice.volume = 1;
-    //     AIStringAsVoice.rate = 1;
-    //     AIStringAsVoice.lang = 'ko-KR';
-    //
-    //     // this is what reads the string out loud
-    //     synth.speak(msg);
-    // }
 
     handleClick = () => {
         let text;
@@ -53,8 +32,6 @@ class App extends Component {
             // start the speech --> string transcription process
             recognition.start();
 
-            console.log('inside if');
-
             // this is what actually captures your speech & converts it to a str
             recognition.onresult = e => {
                 let last = e.results.length - 1;
@@ -67,23 +44,20 @@ class App extends Component {
                 // socket
                 socket.emit("userAudio", text);
 
-                function synthVoice(AIResponse) {
-                    // CREATE CONTEXT FOR SPEECH SYNTHESIS
+                function synthVoice(text) {
+                    // create context for speech synthesis
                     const synth = window.speechSynthesis;
                     const AIStringAsVoice = new SpeechSynthesisUtterance();
-                    // DEFINE WHAT TEXT AI WILL BE SPEAKING
+                    // define what text AI will be speaking
                     AIStringAsVoice.text = text;
 
-                    console.log('inside synthVoice')
-
-                    // CUSTOMIZE AI'S VOICE
-                    // THIS IS JUST A SAMPLING OF WAYS TO CUSTOMIZE VOICE
+                    // customize AI's voice
                     AIStringAsVoice.voiceURI = 'Native';
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
                     AIStringAsVoice.lang = 'ko-KR';
-                    // THIS IS WHAT READS THE STRING OUT LOUD
-                    synth.speak(text);
+                    // speak response
+                    synth.speak(AIStringAsVoice);
                 }
 
 
@@ -109,9 +83,13 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="button-container">
-                    <div className="speak-button" onClick={this.handleClick}>speak</div>
+                    <div className="speak-button" onClick={this.handleClick}>
+                        speak
+                    </div>
                 </div>
-                <div className="return-text">text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}</div>
+                <div className="return-text">
+                    text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
+                    </div>
             </div>
         )
     }
