@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import socket from 'socket.io'
-import openSocket from 'socket.io-client'
+import socketio from 'socket.io-client'
 import './App.css';
 
 
@@ -33,7 +33,7 @@ class App extends Component {
     handleClick = () => {
         let text;
 
-        const socket = openSocket();
+        const socket = socketio.connect();
 
         // make sure speech recognition is supported in user's browser
         if (window['webkitSpeechRecognition']) {
@@ -86,11 +86,10 @@ class App extends Component {
                     synth.speak(text);
                 }
 
-                let AIResponse;
 
-                // socket.on("AIResponse", this.synthVoice(AIResponse))
-                socket.on('AIResponse', AIResponse);
-                this.synthVoice(AIResponse)
+                socket.on('AIResponse', function (AIResponse) {
+                    synthVoice(AIResponse);
+                })
             }
 
             // this will stop transcribing your speech when you stop speaking
