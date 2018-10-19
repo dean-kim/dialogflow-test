@@ -8,9 +8,6 @@ server.listen(5000);
 
 const apiai = require('apiai')(secret["apiaiKey"]);
 const io = require('socket.io')(server);
-// const app = require('express')();
-// const server = require('http').createServer(app);
-// const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     socket.on("userAudio", text => {
