@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
             socket.emit('AIResponse', AIResponse)
         });
 
+        // about error
         AIReq.on('error', (error) => {
             console.log(error)
         });
