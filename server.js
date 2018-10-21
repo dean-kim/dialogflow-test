@@ -14,8 +14,6 @@ io.on('connection', (socket) => {
         // capture what the user just said in a userTextToSendToAI
         const userTextToSendToAI = text;
 
-        console.log(userTextToSendToAI);
-
         // send string to AI for processing
         const AIReq = apiai.textRequest(userTextToSendToAI, {
             sessionId: secret.sessionId
