@@ -97,8 +97,8 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="return-text">
-                    Question: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
-                    Response: {this.state.reponseWord ? this.state.reponseWord : "Response"}
+                    Question is: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
+                    Response is: {this.state.reponseWord ? this.state.reponseWord : "Response"}
                     </div>
             </div>
         )
