@@ -6,7 +6,8 @@ import './App.css';
 class App extends Component {
 
     state = {
-        says: ''
+        says: '',
+        reponseWord: ''
     }
 
     handleClick = () => {
@@ -20,8 +21,11 @@ class App extends Component {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
 
-            // korean
-            recognition.lang = 'ko-KR';
+            // korean support not yet ㅜㅜ
+            // recognition.lang = 'ko-KR';
+
+            // english
+            recognition.lang = 'en-US';
 
             // process user audio while user is speaking
             recognition.interimResults = false;
@@ -31,6 +35,10 @@ class App extends Component {
 
             // start the speech --> string transcription process
             recognition.start();
+
+            const synth = window.speechSynthesis;
+            const voices = synth.getVoices();
+
 
             // this is what actually captures your speech & converts it to a str
             recognition.onresult = e => {
@@ -51,11 +59,12 @@ class App extends Component {
                     // define what text AI will be speaking
                     AIStringAsVoice.text = text;
 
-                    // customize AI's voice
-                    AIStringAsVoice.voiceURI = 'Native';
+                    // customize AI's voice (Female)
+                    AIStringAsVoice.voice = voices[41];
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
-                    AIStringAsVoice.lang = 'ko-KR';
+                    AIStringAsVoice.lang = 'en-US';
+                    this.setState({responseWord: AIStringAsVoice.text})
                     // speak response
                     synth.speak(AIStringAsVoice);
                 }
@@ -74,7 +83,7 @@ class App extends Component {
             // if error, set text = to what the error is so user knows
             recognition.onerror = e => {
                 text = 'Error occurred in recognition: ' + e.error;
-                return;
+                return text;
             }
         }
     }
@@ -88,7 +97,8 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="return-text">
-                    text: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
+                    Question: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
+                    Response: {this.state.reponseWord ? this.state.reponseWord : "Response"}
                     </div>
             </div>
         )

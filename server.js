@@ -1,5 +1,5 @@
 const secret = require('./secret.json');
-const apiai = require('apiai')(secret["apiaiKey"]);
+const apiai = require('apiai')(secret.apiaiKey);
 
 const express = require('express');
 const app = express();
