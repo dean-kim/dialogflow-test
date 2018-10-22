@@ -24,7 +24,7 @@ class App extends Component {
             // recognition.lang = 'ko-KR';
 
             // english
-            recognition.lang = 'en-US';
+            recognition.lang = 'en-GB';
 
             // process user audio while user is speaking
             recognition.interimResults = false;
@@ -59,10 +59,13 @@ class App extends Component {
                     AIStringAsVoice.text = text;
 
                     // customize AI's voice (Female)
+                    AIStringAsVoice.default=false;
                     AIStringAsVoice.voice = voices[41];
+                    AIStringAsVoice.voiceURI = 'Native';
+                    AIStringAsVoice.localservice=true;
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
-                    AIStringAsVoice.lang = 'en-US';
+                    AIStringAsVoice.lang = 'en-GB';
                     // speak response
                     synth.speak(AIStringAsVoice);
                 }
