@@ -6,8 +6,7 @@ import './App.css';
 class App extends Component {
 
     state = {
-        says: '',
-        reponseWord: ''
+        says: ''
     }
 
     handleClick = () => {
@@ -64,7 +63,6 @@ class App extends Component {
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
                     AIStringAsVoice.lang = 'en-US';
-                    this.setState({responseWord: AIStringAsVoice.text})
                     // speak response
                     synth.speak(AIStringAsVoice);
                 }
@@ -97,8 +95,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="return-text">
-                    Question is: {this.state.says ? this.state.says : '"speak" 버튼을 누르시고 말씀을 해주세요'}
-                    Response is: {this.state.reponseWord ? this.state.reponseWord : "Response"}
+                    Question is: {this.state.says ? this.state.says : 'Press "speak" button and ask question'}
                     </div>
             </div>
         )
