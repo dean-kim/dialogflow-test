@@ -59,15 +59,13 @@ class App extends Component {
                     AIStringAsVoice.text = text;
 
                     // customize AI's voice (Female)
-                    AIStringAsVoice.default=false;
                     AIStringAsVoice.voice = voices[41];
-                    AIStringAsVoice.voiceURI = 'Native';
-                    AIStringAsVoice.localservice=true;
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
                     AIStringAsVoice.lang = 'en-GB';
                     // speak response
                     synth.speak(AIStringAsVoice);
+                    console.log(AIStringAsVoice)
                 }
 
 
@@ -104,5 +102,6 @@ class App extends Component {
         )
     }
 }
+
 
 export default App;
