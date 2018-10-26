@@ -1209,8 +1209,6 @@
                             last_lipsync_frame = block.frameIndex;
                         }
                     }
-
-
                 })
             },
             img: withProgress(doImg, true),
@@ -1241,7 +1239,7 @@
         const initialize_talkr_channels = function(){
 
             let blink_key = '0';
-            let eyebrow_key = '1'
+            let eyebrow_key = '1';
             if(talkr_channels[blink_key]){
                 let numframes = talkr_channels[blink_key].numframes;
                 let startframe = talkr_channels[blink_key].index;
@@ -1275,7 +1273,7 @@
                 if( startframe + numframes < frames.length ){
                     // create a default eyebrow anim (if we have at least 4-frames)
                     // This will play randomly on each call to play_for_duration.
-                    if(numframes>=4){
+                    if(numframes >= 4){
                         let custom_eyebrow_anim = [
                             [startframe, 100],
                             [startframe+1, 100],
