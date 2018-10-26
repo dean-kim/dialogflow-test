@@ -102,7 +102,7 @@ class App extends Component {
                     Question is: {this.state.says ? this.state.says : 'Press "speak" button and ask question'}
                     </div>
                 <div>
-                    <img src="https://i.imgur.com/YpKsOQS.gif" alt="trump" />
+                    <img className="lipsync-gif" src="https://i.imgur.com/YpKsOQS.gif" alt="trump" />
                 </div>
             </div>
         )
