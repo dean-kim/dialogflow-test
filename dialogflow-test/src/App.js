@@ -43,6 +43,8 @@ class App extends Component {
             recognition.onresult = e => {
                 let last = e.results.length - 1;
 
+                let speakingDurationEstimate;
+
                 // text = what you just said, in string form
                 text = e.results[last][0].transcript;
 
@@ -58,6 +60,8 @@ class App extends Component {
                     // define what text AI will be speaking
                     AIStringAsVoice.text = text;
 
+                    speakingDurationEstimate = text.length * 50;
+
                     // customize AI's voice (Female)
                     AIStringAsVoice.voice = voices[41];
                     AIStringAsVoice.volume = 1;
@@ -65,9 +69,8 @@ class App extends Component {
                     AIStringAsVoice.lang = 'en-GB';
                     // speak response
                     synth.speak(AIStringAsVoice);
-                    console.log(AIStringAsVoice);
+                    // console.log(speakingDurationEstimate);
                 }
-
 
                 socket.on('AIResponse', function (AIResponse) {
                     synthVoice(AIResponse);
