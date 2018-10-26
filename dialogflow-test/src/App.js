@@ -98,6 +98,9 @@ class App extends Component {
                 <div className="return-text">
                     Question is: {this.state.says ? this.state.says : 'Press "speak" button and ask question'}
                     </div>
+                <div>
+                    <img src="https://i.imgur.com/YpKsOQS.gif" />
+                </div>
             </div>
         )
     }
