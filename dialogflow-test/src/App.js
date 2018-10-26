@@ -65,7 +65,7 @@ class App extends Component {
                     AIStringAsVoice.lang = 'en-GB';
                     // speak response
                     synth.speak(AIStringAsVoice);
-                    console.log(AIStringAsVoice)
+                    console.log(AIStringAsVoice);
                 }
 
 
