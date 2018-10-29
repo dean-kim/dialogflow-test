@@ -6,11 +6,13 @@ import './App.css';
 class App extends Component {
 
     state = {
-        says: ''
-    }
+        says: '',
+        responseWord: ''
+    };
 
     handleClick = () => {
         let text;
+        // let responseWord = {'word': ''};
 
         const socket = socketio.connect();
 
@@ -43,7 +45,7 @@ class App extends Component {
             recognition.onresult = e => {
                 let last = e.results.length - 1;
 
-                let speakingDurationEstimate;
+                let responseWord;
 
                 // text = what you just said, in string form
                 text = e.results[last][0].transcript;
@@ -53,14 +55,14 @@ class App extends Component {
                 // socket
                 socket.emit("userAudio", text);
 
-                function synthVoice(text) {
+                const synthVoice = (text) => {
                     // create context for speech synthesis
                     const synth = window.speechSynthesis;
                     const AIStringAsVoice = new SpeechSynthesisUtterance();
                     // define what text AI will be speaking
                     AIStringAsVoice.text = text;
 
-                    speakingDurationEstimate = text.length * 50;
+                    // speakingDurationEstimate = text.length * 50;
 
                     // customize AI's voice (Female)
                     AIStringAsVoice.voice = voices[41];
@@ -68,19 +70,23 @@ class App extends Component {
                     AIStringAsVoice.rate = 1;
                     AIStringAsVoice.lang = 'en-GB';
                     // speak response
+                    responseWord = text;
+                    console.log(responseWord);
+                    this.setState({responseWord: text});
                     synth.speak(AIStringAsVoice);
-                    // console.log(speakingDurationEstimate);
-                }
+                };
 
                 socket.on('AIResponse', function (AIResponse) {
                     synthVoice(AIResponse);
-                })
-            }
+                });
+
+                console.log(this.state);
+            };
 
             // this will stop transcribing your speech when you stop speaking
             recognition.onspeechend = () => {
                 recognition.stop();
-            }
+            };
 
             // if error, set text = to what the error is so user knows
             recognition.onerror = e => {
@@ -88,7 +94,12 @@ class App extends Component {
                 return text;
             }
         }
-    }
+    };
+
+    // handleChange = (text) => {
+    //     this.setState({responseWord: text});
+    //     console.log(this.state);
+    // };
 
     render() {
         return (
