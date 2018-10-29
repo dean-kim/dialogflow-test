@@ -86,7 +86,7 @@ module.exports = {
     },
     plugins: [
         PnpWebpackPlugin,
-        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, paths.appGifImage, paths.appStopImage]),
     ],
     },
     resolveLoader: {

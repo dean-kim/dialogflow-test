@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import socketio from 'socket.io-client'
 import './App.css';
+import '../static/media/trump.gif'
 
 
 class App extends Component {
@@ -96,10 +97,6 @@ class App extends Component {
         }
     };
 
-    // handleChange = (text) => {
-    //     this.setState({responseWord: text});
-    //     console.log(this.state);
-    // };
 
     render() {
         return (
@@ -113,7 +110,9 @@ class App extends Component {
                     Question is: {this.state.says ? this.state.says : 'Press "speak" button and ask question'}
                     </div>
                 <div>
-                    <img className="lipsync-gif" src="https://i.imgur.com/YpKsOQS.gif" alt="trump" />
+                    {this.state.responseWord ?
+                        <img src={require("../static/media/trump.gif")} alt="trump" className="lipsync-gif" />
+                        : <img src={require("../static/media/trump_stop.jpg")} alt="trump-stop" className="lipsync-gif" />}
                 </div>
             </div>
         )
