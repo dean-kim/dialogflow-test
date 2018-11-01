@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import socketio from 'socket.io-client'
 import './App.css';
-import '../static/media/trump.gif'
 
 
 class App extends Component {
@@ -13,7 +12,6 @@ class App extends Component {
 
     handleClick = () => {
         let text;
-        // let responseWord = {'word': ''};
 
         const socket = socketio.connect();
 
@@ -38,9 +36,8 @@ class App extends Component {
             // start the speech --> string transcription process
             recognition.start();
 
-            const synth = window.speechSynthesis;
-            const voices = synth.getVoices();
-
+            // const synth = window.speechSynthesis;
+            // const voices = synth.getVoices();
 
             // this is what actually captures your speech & converts it to a str
             recognition.onresult = e => {
@@ -63,25 +60,32 @@ class App extends Component {
                     // define what text AI will be speaking
                     AIStringAsVoice.text = text;
 
-                    // speakingDurationEstimate = text.length * 50;
-
                     // customize AI's voice (Female)
-                    AIStringAsVoice.voice = voices[41];
+                    // AIStringAsVoice.voice = voices[41];
+
+                    // customize about voice
                     AIStringAsVoice.volume = 1;
                     AIStringAsVoice.rate = 1;
                     AIStringAsVoice.lang = 'en-GB';
-                    // speak response
+
                     responseWord = text;
-                    console.log(responseWord);
-                    this.setState({responseWord: text});
+
+                    // set speaking duration by responseWord length
+                    let speakingDurationEstimate = responseWord.length * 100;
+
+                    // set responseWord in state & set responseWord empty when speaking duration over
+                    this.setState({responseWord: text}, ()=>{
+                        setTimeout(()=>{
+                            this.setState({responseWord: ''})
+                        }, speakingDurationEstimate)});
+
+                    // speak response
                     synth.speak(AIStringAsVoice);
                 };
 
                 socket.on('AIResponse', function (AIResponse) {
                     synthVoice(AIResponse);
                 });
-
-                console.log(this.state);
             };
 
             // this will stop transcribing your speech when you stop speaking
@@ -111,8 +115,10 @@ class App extends Component {
                     </div>
                 <div>
                     {this.state.responseWord ?
-                        <img src={require("../static/media/trump.gif")} alt="trump" className="lipsync-gif" />
-                        : <img src={require("../static/media/trump_stop.jpg")} alt="trump-stop" className="lipsync-gif" />}
+                        <img src={require("../static/media/trump.gif")}
+                             alt="trump" className="lipsync-gif" />
+                        : <img src={require("../static/media/trump_eye.gif")}
+                               alt="trump-stop" className="lipsync-gif" />}
                 </div>
             </div>
         )

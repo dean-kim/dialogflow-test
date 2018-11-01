@@ -49,7 +49,7 @@ module.exports = {
     appPackageJson: resolveApp('package.json'),
     appSrc: resolveApp('src'),
     appGifImage: resolveApp('static/media/trump.gif'),
-    appStopImage: resolveApp('static/media/trump_stop.jpg'),
+    appGifDefaultImage: resolveApp('static/media/trump_eye.gif'),
     yarnLockFile: resolveApp('yarn.lock'),
     testsSetup: resolveApp('src/setupTests.js'),
     proxySetup: resolveApp('src/setupProxy.js'),
